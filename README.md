@@ -4,9 +4,9 @@
 
 The workflow is intentionally two-stage:
 
-1. Generate a complete polished Image2 reference diagram first.
-2. Write a coverage lock so every required mechanism point is assigned to an output carrier.
-3. Generate a clean Image2 asset board from the reference image, with one complex pictorial object per guide box.
+1. Generate a polished Image2 style master first with the minimal prompt `Make this into a polished diagram: [User content]`.
+2. Inspect the first image for reusable visual style, then write a coverage lock so every required mechanism point is assigned to an output carrier.
+3. Generate a clean Image2 asset board from the style master and coverage lock, with one complex pictorial object per guide box.
 4. Extract each framed object as a transparent PNG cutout.
 5. Build a PPTX library containing independent picture objects and editable text labels.
 

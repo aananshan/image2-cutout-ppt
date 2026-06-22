@@ -1,18 +1,19 @@
 # Prompt Patterns
 
-## Stage 1 Complete Polished Diagram
+## Stage 1 Minimal Style-Master Prompt
 
-Use this for the first Image2 generation. Stage 1 must be generated with Image2 unless the user explicitly authorizes a fallback. The goal is a beautiful complete diagram, not cutouts.
+Use this for the first Image2 generation. Stage 1 must be generated with Image2 unless the user explicitly authorizes a fallback. The goal is a useful style master, not content locking, crop-readiness, or exact text.
+
+Do not add a fixed style prompt, domain-specific style language, journal-style adjectives, or extraction constraints. Send the user's own content with only this minimal wrapper:
 
 ```text
-Create a complete polished scientific mechanism diagram / technical route map / process flow figure.
-
-Design the full composition with strong visual hierarchy, coherent scientific storytelling, balanced spacing, professional color palette, and high-end publication-style illustration quality. Make the diagram visually beautiful and internally consistent. Use elegant pictorial modules, clean spatial grouping, clear directional flow, and polished biomedical / engineering / software / technical illustration style as appropriate for the subject.
-
-Text may be omitted or kept as simple placeholders if exact wording is uncertain. Prioritize visual style, module design, composition, and complete object appearance. Avoid clutter. Keep all important objects fully visible and avoid excessive overlap.
-
-Return one complete high-resolution diagram image.
+Make this into a polished diagram:
+[User content]
 ```
+
+## Stage 1 Aftercare
+
+After Stage 1, inspect the image as a style master. Do not treat it as the content source of truth. Record the visual language worth preserving: object style, module shapes, color palette, rendering texture, layout density, and any visual motifs. Then compare the user's actual content against the Stage 1 image and write the coverage lock from the user's content, not from Image2's omissions. Stage 2 receives both the Stage 1 image for style and the coverage lock for required content.
 
 ## Coverage Lock
 

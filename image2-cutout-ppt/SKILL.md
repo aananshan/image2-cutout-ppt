@@ -7,38 +7,44 @@ description: Use when turning Image2-generated scientific mechanism diagrams, te
 
 ## Overview
 
-Use an Image2-first two-stage raster workflow with a coverage lock. Stage 1 must use Image2 to generate the complete polished diagram so Image2 solves style, composition, visual hierarchy, and scientific storytelling. Stage 2 must use Image2 again, with the Stage 1 image and coverage lock as references, to generate the cutout-ready asset board. Do not substitute another image generator, SVG renderer, slide generator, or manual redraw path unless the user explicitly authorizes a fallback.
+Use an Image2-first two-stage raster workflow with a coverage lock. Stage 1 must use Image2 with a minimal prompt: `Make this into a polished diagram: [user content]`. Stage 1 is a style master, not a content lock. Stage 2 must use Image2 again, with the Stage 1 image and coverage lock as references, to generate the cutout-ready asset board. Do not substitute another image generator, SVG renderer, slide generator, or manual redraw path unless the user explicitly authorizes a fallback.
 
 If Image2 is unavailable, stop and report the missing Image2 access or configuration. Do not silently downgrade to another generator. Do not skip the complete diagram stage unless the user already provides a polished Image2 reference image or explicitly asks for assets only.
 
 ## Two-Stage Workflow
 
 1. Generate or receive a **complete polished Image2 diagram**.
-   - Must use Image2 for the full beautiful mechanism, technical route map, process diagram, or flowchart.
-   - Use this as the aesthetic/style master, not as the direct crop source.
+   - Must use Image2 with the minimal Stage 1 prompt.
+   - Use this as the style master, not as the content source of truth or direct crop source.
+   - Do not judge Stage 1 by exact text, exact coverage, or crop readiness.
    - Check whether the overall visual style is worth preserving before continuing.
-2. Write a **coverage lock** before the cutout-ready asset board.
+2. After Stage 1, inspect the style master and write notes.
+   - Record visual language worth preserving: object style, module shapes, color palette, rendering texture, layout density, and visual motifs.
+   - Identify obvious style problems that would hurt Stage 2, such as severe clutter, unreadable object boundaries, or a look that does not match the requested figure type.
+   - Compare the Stage 1 image with the user's actual content; do not copy Image2's omissions into the next step.
+3. Write the **coverage lock** before the cutout-ready asset board.
    - List every mechanism point that must survive: entities, states, branches, validation results, and outcomes.
    - Assign each item to either `Image2 cutout`, `native PPT text`, `native PPT arrow/box`, or `do not include`.
    - Do not let Image2 choose only the most visually salient objects.
    - If a mechanism point needs a pictorial cue, include a dedicated visual unit for it in the asset-board prompt.
-3. Use the completed diagram as the visual reference for a **cutout-ready asset board**.
+4. Use the completed diagram as the visual reference for a **cutout-ready asset board**.
    - Must use Image2 for the asset board unless the user explicitly authorizes a fallback.
    - Ask Image2 to preserve the style and redraw only complex pictorial objects.
    - Do not preserve the original layout.
    - Exclude text, arrows, simple rectangles, containers, flow lines, panels, cards, labels, and captions.
    - Put one complex object per thin rectangular guide box with generous padding.
    - Use multiple asset boards when the coverage lock has too many visual units for one grid.
-4. Extract transparent PNG modules from the framed asset board with `scripts/extract_framed_cutouts.py`.
-5. Inspect the detection audit and cutout overview for missing boxes, incomplete crops, unwanted text fragments, object-edge loss, or missing mechanism content.
-6. Build a cutout-only PPT asset library with `scripts/build_cutout_only_ppt.py`.
-7. Verify the PPT contains independent picture objects and editable text labels only; no redrawn mechanism layout.
+5. Extract transparent PNG modules from the framed asset board with `scripts/extract_framed_cutouts.py`.
+6. Inspect the detection audit and cutout overview for missing boxes, incomplete crops, unwanted text fragments, object-edge loss, or missing mechanism content.
+7. Build a cutout-only PPT asset library with `scripts/build_cutout_only_ppt.py`.
+8. Verify the PPT contains independent picture objects and editable text labels only; no redrawn mechanism layout.
 
 ## Prompt References
 
 Read `references/prompts.md` when generating images. Use:
 
-- **Stage 1 Complete Polished Diagram** for the first full Image2 generation.
+- **Stage 1 Minimal Style-Master Prompt** for the first Image2 generation.
+- **Stage 1 Aftercare** after the first image is generated.
 - **Coverage Lock** before the second generation.
 - **Stage 2 Cutout-Ready Asset Board** for the second Image2 generation using the completed diagram and coverage lock as references.
 - **Stronger Extraction Variant** if the first asset board crops poorly.
