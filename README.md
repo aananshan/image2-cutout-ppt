@@ -1,16 +1,16 @@
 # Image2 Cutout PPT
 
-`image2-cutout-ppt` is a Codex skill for turning Image2 or other AI-generated scientific mechanism diagrams, technical route maps, process diagrams, and flowcharts into transparent cutout PNG modules plus a cutout-only editable PowerPoint asset library.
+`image2-cutout-ppt` is an Image2-first Codex skill for turning scientific mechanism diagrams, technical route maps, process diagrams, and flowcharts into transparent cutout PNG modules plus a cutout-only editable PowerPoint asset library.
 
 The workflow is intentionally two-stage:
 
-1. Generate a complete polished reference diagram first.
+1. Generate a complete polished Image2 reference diagram first.
 2. Write a coverage lock so every required mechanism point is assigned to an output carrier.
-3. Generate a clean asset board from the reference image, with one complex pictorial object per guide box.
+3. Generate a clean Image2 asset board from the reference image, with one complex pictorial object per guide box.
 4. Extract each framed object as a transparent PNG cutout.
 5. Build a PPTX library containing independent picture objects and editable text labels.
 
-This repository does not include API keys or provider-specific credentials. Image generation is provider-agnostic; use your own configured Image2/OpenAI-compatible environment, then run the extraction and PPT scripts locally.
+This repository does not include API keys or private Image2 credentials. The intended workflow requires Image2 for both the polished reference diagram and the cutout-ready asset board unless the user explicitly authorizes a fallback. Configure your own Image2/OpenAI-compatible environment, then run the extraction and PPT scripts locally.
 
 ## Install
 

@@ -47,6 +47,23 @@ class SkillDocsTests(unittest.TestCase):
         for forbidden in ["artemia", "cyclin k", "cdk9", "erk", "rsk", "tunel", "nauplius"]:
             self.assertNotIn(forbidden, prompts)
 
+    def test_requires_image2_unless_user_explicitly_overrides(self):
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8").lower()
+        prompts = (SKILL_DIR / "references" / "prompts.md").read_text(encoding="utf-8").lower()
+        readme_path = SKILL_DIR.parents[0] / "README.md"
+        readme = readme_path.read_text(encoding="utf-8").lower() if readme_path.exists() else ""
+
+        self.assertIn("image2-first", skill)
+        self.assertIn("must use image2", skill)
+        self.assertIn("unless the user explicitly authorizes a fallback", skill)
+        self.assertIn("do not substitute", skill)
+        self.assertIn("stage 1 must be generated with image2", prompts)
+        self.assertIn("stage 2 must be generated with image2", prompts)
+        if readme:
+            self.assertIn("image2-first", readme)
+            self.assertNotIn("provider-agnostic", readme)
+        self.assertNotIn("other ai-generated", skill)
+
 
 if __name__ == "__main__":
     unittest.main()

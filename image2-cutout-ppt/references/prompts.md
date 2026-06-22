@@ -2,7 +2,7 @@
 
 ## Stage 1 Complete Polished Diagram
 
-Use this for the first Image2 generation. The goal is a beautiful complete diagram, not cutouts.
+Use this for the first Image2 generation. Stage 1 must be generated with Image2 unless the user explicitly authorizes a fallback. The goal is a beautiful complete diagram, not cutouts.
 
 ```text
 Create a complete polished scientific mechanism diagram / technical route map / process flow figure.
@@ -37,7 +37,7 @@ Stage 2 must include all Image2 cutout visual units. Do not omit any listed unit
 
 ## Stage 2 Cutout-Ready Asset Board
 
-Use this for the second Image2 generation. Provide the Stage 1 image and the coverage lock as references.
+Use this for the second Image2 generation. Stage 2 must be generated with Image2 unless the user explicitly authorizes a fallback. Provide the Stage 1 Image2 image and the coverage lock as references.
 
 ```text
 Use the completed diagram as the visual reference for style and object design.

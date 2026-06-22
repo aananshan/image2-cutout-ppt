@@ -1,18 +1,20 @@
 ---
 name: image2-cutout-ppt
-description: Use when turning Image2 or other AI-generated scientific mechanism diagrams, technical route maps, process diagrams, flowcharts, or figure concepts into a polished reference image first, then transparent cutout PNG modules and a cutout-only editable PowerPoint asset library.
+description: Use when turning Image2-generated scientific mechanism diagrams, technical route maps, process diagrams, flowcharts, or figure concepts into a polished reference image first, then transparent cutout PNG modules and a cutout-only editable PowerPoint asset library.
 ---
 
 # Image2 Cutout PPT
 
 ## Overview
 
-Use a two-stage raster workflow with a coverage lock. First generate a complete polished diagram so Image2 can solve style, composition, visual hierarchy, and scientific storytelling. Then define the mechanism content that must survive conversion before generating a cutout-ready asset board. Do not skip the complete diagram stage unless the user already provides a polished reference image or explicitly asks for assets only.
+Use an Image2-first two-stage raster workflow with a coverage lock. Stage 1 must use Image2 to generate the complete polished diagram so Image2 solves style, composition, visual hierarchy, and scientific storytelling. Stage 2 must use Image2 again, with the Stage 1 image and coverage lock as references, to generate the cutout-ready asset board. Do not substitute another image generator, SVG renderer, slide generator, or manual redraw path unless the user explicitly authorizes a fallback.
+
+If Image2 is unavailable, stop and report the missing Image2 access or configuration. Do not silently downgrade to another generator. Do not skip the complete diagram stage unless the user already provides a polished Image2 reference image or explicitly asks for assets only.
 
 ## Two-Stage Workflow
 
-1. Generate or receive a **complete polished diagram**.
-   - Let Image2 make the full beautiful mechanism, technical route map, process diagram, or flowchart.
+1. Generate or receive a **complete polished Image2 diagram**.
+   - Must use Image2 for the full beautiful mechanism, technical route map, process diagram, or flowchart.
    - Use this as the aesthetic/style master, not as the direct crop source.
    - Check whether the overall visual style is worth preserving before continuing.
 2. Write a **coverage lock** before the cutout-ready asset board.
@@ -21,6 +23,7 @@ Use a two-stage raster workflow with a coverage lock. First generate a complete 
    - Do not let Image2 choose only the most visually salient objects.
    - If a mechanism point needs a pictorial cue, include a dedicated visual unit for it in the asset-board prompt.
 3. Use the completed diagram as the visual reference for a **cutout-ready asset board**.
+   - Must use Image2 for the asset board unless the user explicitly authorizes a fallback.
    - Ask Image2 to preserve the style and redraw only complex pictorial objects.
    - Do not preserve the original layout.
    - Exclude text, arrows, simple rectangles, containers, flow lines, panels, cards, labels, and captions.
@@ -69,6 +72,7 @@ python "$SKILL_DIR\scripts\build_cutout_only_ppt.py" `
 Before reporting success:
 
 - Confirm a complete polished diagram exists or the user explicitly skipped stage 1.
+- Confirm Stage 1 and Stage 2 used Image2, or record the user's explicit fallback authorization.
 - Confirm a coverage lock exists and every required mechanism point is assigned to a cutout or native PPT element.
 - Run `python ...\scripts\test_framed_cutouts.py`.
 - Run `python ...\scripts\test_cutout_only_ppt.py`.
@@ -80,6 +84,7 @@ Before reporting success:
 ## Common Mistakes
 
 - Do not start with the asset board when the user wants a beautiful mechanism figure; that loses Image2's composition advantage.
+- Do not substitute other image generators, PPT-master SVG, hand-drawn reconstruction, or native PPT drawing for the Image2 generation stages unless the user explicitly authorizes a fallback.
 - Do not let the asset board contain only pretty biological objects when the mechanism also needs state changes, loss-of-function branches, validation outcomes, or pathway statuses.
 - Do not crop a finished diagram directly when a second asset-board generation can produce cleaner isolated objects.
 - Do not ask Image2 for text labels in the asset board; AI text causes dirty cutouts.
