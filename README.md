@@ -1,8 +1,12 @@
 # Image2 Cutout PPT
 
-`image2-cutout-ppt` is an Image2-first Codex skill for turning scientific mechanism diagrams, technical route maps, process diagrams, and flowcharts into transparent cutout PNG modules plus a cutout-only editable PowerPoint asset library.
+## Overview
 
-中文简介：本仓库是一个用于 Codex 的 Image2 科研机制图拆图与 PPT 资产化 skill。流程采用两阶段 Image2：第一阶段只根据用户提供的机制内容自由生成完整、美观的参考图，并在用户确认满意后，第二阶段再根据参考图风格和 coverage lock 生成便于抠图的模块平铺图。随后自动提取透明 PNG 模块，并生成可编辑 PowerPoint 资产库。仓库不包含 API key、论文原文、实验图片或本地中间产物。
+**English**  
+`image2-cutout-ppt` is an Image2-first Codex skill that turns beautiful scientific diagrams into reusable PowerPoint-ready assets. It lets Image2 do what it does best first: freely design a polished mechanism figure, technical roadmap, process diagram, or flowchart. After the user approves the visual direction, the skill generates a clean cutout board, extracts isolated transparent PNG modules, checks crop completeness, and packages everything into an editable PPTX asset library. Instead of fighting with a flat screenshot, you get a reusable figure-building kit.
+
+**中文**  
+`image2-cutout-ppt` 是一套 Image2-first 的 Codex skill，用来把 Image2 精美科研图变成 PowerPoint 可复用素材库。它先让 Image2 自由发挥，生成一张完整、美观的科研机制图、技术路线图、流程图或过程图；在用户确认满意后，再把同一套视觉风格拆成干净、独立、便于抠图的模块，自动提取透明 PNG，并打包成可在 PPT 中自由组合、标注和复用的资产库。它不是把一张截图硬塞进幻灯片，而是把一张漂亮图变成一套可编辑、可复用的科研绘图积木。
 
 The workflow is intentionally two-stage:
 
