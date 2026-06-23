@@ -1,16 +1,16 @@
 # Image2 Cutout PPT
 
-## 痛点 / Why This Exists
+## 背景 / Background
 
 **中文**  
-现在用 Image2 做科研机制图、技术路线图和流程图时，最尴尬的地方不是“画不漂亮”，而是“漂亮之后不好用”：整张图是一张扁平图片，PPT 里改不了；直接抠原图容易裁切不完整、把文字和箭头一起抠进去；让 AI 再生成一版抠图素材时，又容易漏模块、改错内容，甚至把第二阶段的提示词污染到第一张参考图里。
+科研机制图、技术路线图和流程图正在越来越多地由 Image2 这类图像模型完成第一版设计。它们很擅长生成完整、美观、有视觉吸引力的参考图，但这些图真正进入论文汇报、组会 PPT 或项目路演时，问题会集中出现：AI 生成的文字容易模糊、错拼或变成伪英文；整张图本质上仍是一张扁平位图，模块、标签和箭头都不能独立编辑；直接从原图抠元素又容易裁切不完整、带出背景、混入箭头或文字残片；再让 AI 重画一版“可编辑素材”时，还可能漏掉关键模块、改错通路，甚至让第二阶段的抠图约束污染第一版的自由创作。
 
-`image2-cutout-ppt` 就是为了解决这个断点：保留 Image2 最强的审美和构图能力，同时把最终结果变成可检查、可拆分、可复用、可在 PowerPoint 里继续编辑的科研绘图资产。
+`image2-cutout-ppt` 的目标是把这两件事接起来：保留 Image2 在审美、构图和复杂图案生成上的优势，同时把文字、箭头和流程关系交还给 PowerPoint 原生元素，把复杂图案整理成干净、完整、可抠图的模块，最终形成一套可检查、可拆分、可复用的科研绘图资产库。
 
 **English**  
-Image2 can make scientific diagrams look great, but the hard part starts after the image is generated. A polished diagram is still a flat screenshot: hard to edit in PowerPoint, easy to crop incorrectly, and prone to carrying unwanted text, arrows, or broken fragments into downstream assets. A second AI generation can also omit key modules or contaminate the first creative prompt with extraction rules.
+Scientific mechanism figures, technical roadmaps, and process diagrams are increasingly drafted with image models such as Image2. These models are excellent at producing complete, polished, visually appealing reference images. The problem appears when those images need to become presentation or publication assets: generated text may be blurry or misspelled, the diagram remains a flat bitmap, individual modules and arrows are not editable, direct crops often lose edges or carry background and text fragments, and a second AI redraw can omit important modules or distort the original mechanism.
 
-`image2-cutout-ppt` bridges that gap. It preserves Image2's visual strengths while turning the result into auditable, reusable, PowerPoint-friendly figure assets.
+`image2-cutout-ppt` connects these two needs. It keeps Image2's strengths in visual design and complex object generation, while moving text, arrows, and process structure back to native PowerPoint elements. Complex pictorial objects are regenerated as clean, complete, cutout-ready modules, turning one attractive but uneditable screenshot into an auditable and reusable scientific figure asset library.
 
 ## 简介 / Overview
 
