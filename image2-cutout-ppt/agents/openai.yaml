@@ -1,6 +1,6 @@
 interface:
   display_name: "Image2 Cutout PPT"
   short_description: "Make polished AI figures into PPT assets"
-  default_prompt: "Use $image2-cutout-ppt with Image2 for both the polished reference diagram and cutout-ready asset board, then derive a cutout-only editable PPT asset library."
+  default_prompt: "Use $image2-cutout-ppt with Image2. Generate Stage 1 from source content only, stop for user approval, then generate the cutout-ready asset board and derive a cutout-only editable PPT asset library."
 policy:
   allow_implicit_invocation: true

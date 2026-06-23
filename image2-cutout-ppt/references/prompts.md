@@ -1,23 +1,44 @@
 # Prompt Patterns
 
-## Stage 1 Minimal Style-Master Prompt
+## Stage 1 Source-Only Style-Master Prompt
 
 Use this for the first Image2 generation. Stage 1 must be generated with Image2 unless the user explicitly authorizes a fallback. The goal is a useful style master, not content locking, crop-readiness, or exact text.
 
-Do not add a fixed style prompt, domain-specific style language, journal-style adjectives, or extraction constraints. Send the user's own content with only this minimal wrapper:
+Create a task-local Stage 0 source brief from the user's content, paper, sketch, or notes. The brief may describe the mechanism in plain words, but it must not contain layout instructions, extraction instructions, guide-box instructions, fixed color palettes, or the coverage lock. The skill must never store domain-specific mechanism content in its own files.
+
+Do not add a fixed wrapper. Do not add a fixed style prompt, domain-specific style language, journal-style adjectives, or extraction constraints. Send only the user's own content or the Stage 0 source brief as the entire Image2 prompt. If the user gives one sentence, send that one sentence. If the source is a long paper or messy notes, first compress it into a factual source brief, then send only that brief.
 
 ```text
-Make this into a polished diagram:
-[User content]
+[User content or Stage 0 source brief only]
 ```
+
+Forbidden in Stage 1: fixed wrapper text, coverage lock, preferred composition, text policy, no readable text, guide box, asset board, cutout-ready, row-major order, leave open space for editable PowerPoint labels, and fixed color palette.
+
+Save the exact Stage 1 prompt as `analysis/stage1_prompt.txt`. Run the Stage 1 prompt audit before calling Image2.
+
+## Stage 1 User Approval
+
+After Stage 1, display the generated image and stop. Ask the user whether the first image is good enough as the style master before continuing to Stage 2. Do not write the coverage lock, Stage 2 prompt, asset board, cutouts, or PPT until the user approves.
+
+Suggested user-facing question:
+
+```text
+第一版整体风格和完整度满意吗？满意的话我再进入可抠图第二版；不满意的话我只按你的反馈重生第一版。
+```
+
+If the user is not satisfied, regenerate Stage 1 using the original content plus the user's explicit revision feedback. Keep Stage 2 terms out of the new Stage 1 prompt.
+
+Save the approval record as `analysis/stage1_user_approval.md`.
 
 ## Stage 1 Aftercare
 
-After Stage 1, inspect the image as a style master. Do not treat it as the content source of truth. Record the visual language worth preserving: object style, module shapes, color palette, rendering texture, layout density, and any visual motifs. Then compare the user's actual content against the Stage 1 image and write the coverage lock from the user's content, not from Image2's omissions. Stage 2 receives both the Stage 1 image for style and the coverage lock for required content.
+After the user approves Stage 1, inspect the image as a style master. Do not treat it as the content source of truth. Record the visual language worth preserving: object style, module shapes, color palette, rendering texture, layout density, and any visual motifs. Then compare the user's actual content against the Stage 1 image and write the coverage lock from the user's content, not from Image2's omissions. Do not infer required mechanism content from the Stage 1 image. Stage 2 receives both the approved Stage 1 image for style and the coverage lock for required content.
+
+Save `analysis/stage1_aftercare.md` before creating or finalizing the coverage lock. This file should contain: style notes, Stage 1 omissions or hallucinations, and the decision to preserve or regenerate the style master.
 
 ## Coverage Lock
 
-Write this checklist before Stage 2. The agent should fill it from the paper, user notes, or Stage 1 diagram.
+Write this checklist before Stage 2. Fill it from the paper, user notes, sketch, or other user-provided source material. Do not fill it from Stage 1 visual omissions or hallucinated additions.
 
 ```text
 Coverage lock for Stage 2:
@@ -57,6 +78,8 @@ Do not omit any listed unit. If the list is too long for one clean image, genera
 
 Return a single high-resolution image suitable for automated cropping, background removal, and conversion into a PowerPoint asset library.
 ```
+
+Save the exact Stage 2 prompt as `analysis/stage2_prompt.txt`. Run the Stage 2 prompt audit before calling Image2.
 
 ## Missing Content Warning
 
